@@ -1,0 +1,7 @@
+[
+    {"product": "Ноутбук", "category": "Электроника", "quantity": 2, "price": 75000},
+    {"product": "Мышь", "category": "Электроника", "quantity": 5, "price": 1500},
+    {"product": "Кофеварка", "category": "Бытовая техника", "quantity": 1, "price": 12000},
+    {"product": "Фен", "category": "Бытовая техника", "quantity": 3, "price": 2500},
+    {"product": "Книга", "category": "Книги", "quantity": 10, "price": 600}
+]

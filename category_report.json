@@ -1,0 +1,14 @@
+{
+    "Электроника": {
+        "total_quantity": 7,
+        "total_revenue": 157500
+    },
+    "Бытовая техника": {
+        "total_quantity": 4,
+        "total_revenue": 19500
+    },
+    "Книги": {
+        "total_quantity": 10,
+        "total_revenue": 6000
+    }
+}
