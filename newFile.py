@@ -5917,11 +5917,11 @@ from urllib3.filepost import writer
 
 
 
-import sqlite3
-
-conn = sqlite3.connect('first_db.db')
-
-cursor = conn.cursor()
+# import sqlite3
+#
+# conn = sqlite3.connect('first_db.db')
+#
+# cursor = conn.cursor()
 
 # cursor.execute("""
 # CREATE TABLE IF NOT EXISTS users (
@@ -5976,21 +5976,49 @@ cursor = conn.cursor()
 #
 # print(data)
 
-cursor.execute('''
-SELECT * FROM users
-ORDER BY age DESC, name ASC
-''')
+# cursor.execute('''
+# SELECT * FROM users
+# ORDER BY age DESC, name ASC
+# ''')
+#
+# data = cursor.fetchall()
+#
+# # only_25plus = list(filter(lambda user: user[2] >= 25, data))
+#
+# # print(only_25plus)
+#
+# print(data)
 
-data = cursor.fetchall()
-
-# only_25plus = list(filter(lambda user: user[2] >= 25, data))
-
-# print(only_25plus)
-
-print(data)
 
 
-
+# class BankAccount:
+#     def __init__(self, owner, balance=0):
+#         self.owner = owner
+#         self.balance = balance
+#
+#     def deposit(self, amount):
+#         if amount > 0:
+#             self.balance += amount
+#         else:
+#             print('Please insert positive number')
+#
+#     def withdraw(self, amount):
+#         if self.balance > amount:
+#             self.balance -= amount
+#         elif amount < 0:
+#             print('Please insert positive number')
+#         else:
+#             print('Insufficient funds')
+#
+#     def info(self):
+#         print(f'{self.owner}: {self.balance}')
+#
+#
+# new_ba1 = BankAccount('Vlad')
+#
+# new_ba1.deposit(100)
+# new_ba1.withdraw(50)
+# new_ba1.info()
 
 
 
