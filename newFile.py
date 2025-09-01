@@ -5917,11 +5917,11 @@ from urllib3.filepost import writer
 
 
 
-# import sqlite3
-#
-# conn = sqlite3.connect('first_db.db')
-#
-# cursor = conn.cursor()
+import sqlite3
+
+conn = sqlite3.connect('first_db.db')
+
+cursor = conn.cursor()
 
 # cursor.execute("""
 # CREATE TABLE IF NOT EXISTS users (
@@ -5976,49 +5976,676 @@ from urllib3.filepost import writer
 #
 # print(data)
 
-# cursor.execute('''
-# SELECT * FROM users
-# ORDER BY age DESC, name ASC
-# ''')
+cursor.execute('''
+SELECT * FROM users
+ORDER BY age DESC, name ASC
+''')
+
+data = cursor.fetchall()
+
+# only_25plus = list(filter(lambda user: user[2] >= 25, data))
+
+# print(only_25plus)
+
+print(data)
+
+import re
+# import json
 #
-# data = cursor.fetchall()
 #
-# # only_25plus = list(filter(lambda user: user[2] >= 25, data))
+# def get_json_lists(file_name: str):
+#     with open(file_name, 'r', encoding='utf-8') as f:
+#         content = f.readlines()
 #
-# # print(only_25plus)
+#     content = list(map(lambda l: l.replace('\n', ''), content))
 #
-# print(data)
+#     output = {}
+#
+#     pattern = r"user: (\w+), action: (\w+)"
+#
+#     for line in content:
+#         match = re.search(pattern, line)
+#
+#         if match:
+#             user = match.group(1)
+#             action = match.group(2)
+#
+#             if user not in output:
+#                 output[user] = [action]
+#             else:
+#                 output[user].append(action)
+#
+#     with open('json_logs.json', 'w', encoding='utf-8') as f:
+#          json.dump(output, f, ensure_ascii=False, indent=4)
+#
+#
+# get_json_lists('json_logs.txt')
+#
+# import re
+# import json
+#
+# def get_stats(file_name: str, needed_act: str):
+#     try:
+#         with open(file_name, 'r', encoding='utf-8') as src_file:
+#             content = src_file.readlines()
+#
+#     except FileNotFoundError:
+#         print('No such file in your directory')
+#
+#     content = list(map(lambda line: line.replace('\n', ''), content))
+#
+#     pattern = r'user: (\w+), action: (\w+), device: (\w+)'
+#
+#     output = {}
+#
+#     for l in content:
+#         matching = re.search(pattern, l)
+#
+#         if matching:
+#             user = matching.group(1)
+#             act = matching.group(2)
+#             dev = matching.group(3)
+#
+#
+#             if user not in output:
+#                 output[user] = {}
+#
+#             if dev not in output[user]:
+#                 output[user][dev] = {}
+#
+#             if act not in output[user][dev]:
+#                 if act == needed_act:
+#                     output[user][dev][act] = 1
+#             else:
+#                 if act == needed_act:
+#                     output[user][dev][act] += 1
+#
+#     with open('data.json', 'w', encoding='utf-8') as f:
+#         json.dump(output, f, ensure_ascii=False, indent=4)
+#
+#
+#
+# get_stats('json_logs.txt', 'upload')
+
+
+# list1 = [1,2,3,4]
+# list2 = [3,4,5,6]
+
+
+# Задача:
+#
+# Сделать новый список с элементами, которые встречаются только в одном из списков.
+#
+# Результат: [1,2,5,6]
+
+# def get_unique(data1: list, data2: list):
+#     set1 = set(data1)
+#     set2 = set(data2)
+#
+#     return list((set1 | set2).difference(set1.intersection(set2)))
+#
+#
+# print(get_unique(list1, list2))
+#
+#
+# numbers = [4,9,12,5,18,7]
+#
+# def get_max(data: list):
+#     return max(list(filter(lambda x: x % 3 == 0, data)))
+#
+#
+# print(get_max(numbers))
+
+
+# items = ["apple", "banana", "apple", "orange", "banana", "apple"]
+#
+# def count_duplicates(data: list):
+#     output = {}
+#
+#     for i in data:
+#         output[i] = output.get(i, 0) + 1
+#
+#     for i, c in output.items():
+#         print(f'{i}: {c}')
+#
+#
+#
+# count_duplicates(items)
+
+
+# numbers = [5, 2, 9, 1, 5, 6, 3]
+#
+#
+# def process_nums(data: list):
+#     return sorted(list(filter(lambda x: x > 4, data)),reverse=True)
+#
+#
+# print(process_nums(numbers))
 
 
 
-# class BankAccount:
-#     def __init__(self, owner, balance=0):
-#         self.owner = owner
-#         self.balance = balance
+# nums = [2,23,2,11, 8, 13, 1, 60]
+# target = 4
 #
-#     def deposit(self, amount):
-#         if amount > 0:
-#             self.balance += amount
+# def get_ind(data: list, targ: int):
+#     init_data = data.copy()
+#     del_counter = 0
+#     for i in range(len(init_data)):
+#         data.pop(0)
+#         del_counter += 1
+#
+#         for n in range(len(data)):
+#             if init_data[i] + data[n] == targ:
+#                 return init_data.index(init_data[i]), data.index(data[n]) + del_counter
+#
+#     return None
+#
+#
+# print(get_ind(nums, target))
+
+
+# import re
+#
+# def get_messes(file_name: str):
+#     try:
+#         with open(file_name, 'r', encoding='utf-8') as src_file:
+#             content = src_file.read()
+#
+#     except FileNotFoundError:
+#         print('No such file in your directory')
+#
+#     output = {}
+#
+#     mess_list = re.findall(r'\d] [A-Z]+', content)
+#
+#     mess_list = map(lambda info: info[3:], mess_list)
+#
+#     for info in mess_list:
+#         output[info] = output.get(info, 0) + 1
+#
+#     for i, c in output.items():
+#         print(f'{i}: {c}')
+#
+#
+# get_messes('logs2208.txt')
+
+# sentences = [
+#     "Hello world",
+#     "Python is fun",
+#     "Middle level challenge"
+# ]
+#
+# def analyze_sent(data: list):
+#     res = {}
+#
+#     for sentence in data:
+#         res[sentence] = {}
+#
+#         for letter in sentence.lower():
+#             if letter != ' ':
+#                 res[sentence][letter] = res[sentence].get(letter, 0) + 1
+#
+#
+#     return res
+#
+#
+# print(analyze_sent(sentences))
+
+
+
+# Нужно:
+#
+# Найти средний возраст пользователей в каждом городе.
+# 👉 Например: {"Berlin": 27.67, "Paris": 25.0}
+#
+# Найти имя самого молодого пользователя в каждом городе.
+# 👉 Например: {"Berlin": "Alice", "Paris": "Diana"}
+
+# users = [
+#     {"id": 1, "name": "Alice", "age": 23, "city": "Berlin"},
+#     {"id": 2, "name": "Bob", "age": 31, "city": "Berlin"},
+#     {"id": 3, "name": "Charlie", "age": 27, "city": "Paris"},
+#     {"id": 4, "name": "Diana", "age": 23, "city": "Paris"},
+#     {"id": 5, "name": "Eve", "age": 29, "city": "Berlin"},
+# ]
+#
+#
+# def get_cities_stats(data: list):
+#     aver_age = {}
+#     min_age_user = {}
+#
+#     for user in data:
+#         city = user['city']
+#         age = user['age']
+#         name = user['name']
+#
+#         if not city in aver_age:
+#             aver_age[city] = [age, 1]
 #         else:
-#             print('Please insert positive number')
+#             aver_age[city][0] += age
+#             aver_age[city][1] += 1
 #
-#     def withdraw(self, amount):
-#         if self.balance > amount:
-#             self.balance -= amount
-#         elif amount < 0:
-#             print('Please insert positive number')
+#         if not city in min_age_user:
+#             min_age_user[city] = (name, age)
 #         else:
-#             print('Insufficient funds')
+#             if age < min_age_user[city][1]:
+#                 min_age_user[city] = (name, age)
 #
-#     def info(self):
-#         print(f'{self.owner}: {self.balance}')
+#     for city in aver_age:
+#         aver_age[city] = round(aver_age[city][0] / aver_age[city][1], 2)
+#
+#     for city in min_age_user:
+#         min_age_user[city] = min_age_user[city][0]
 #
 #
-# new_ba1 = BankAccount('Vlad')
+#     return aver_age, min_age_user
 #
-# new_ba1.deposit(100)
-# new_ba1.withdraw(50)
-# new_ba1.info()
+#
+# print(get_cities_stats(users))
+
+
+# test = "dvdf"
+#
+# def get_longest_substring(data: str):
+#     data += data[-1]
+#
+#     subs = []
+#
+#     for i in range(len(data)):
+#         current_string = data[i]
+#
+#         for j in range(i + 1, len(data)):
+#             if data[j] not in current_string:
+#                 current_string += data[j]
+#             else:
+#                 subs.append(current_string)
+#                 break
+#
+#     return max(subs, key=len)
+
+#     for i in range(len(data)):
+#         current_string = f'{data[i]}'
+#         print(current_string)
+#
+#         for j in range(i + 1, len(data)):
+#
+#             if data[j] not in current_string:
+#                 current_string += data[j]
+#
+#             else:
+#                 if len(current_string) > len(res):
+#                     res = current_string
+#                     break
+#                 else:
+#                     break
+
+#    for i in range(len(data)):
+#         current_string = f'{data[i]}'
+#         print(current_string)
+#         for j in range(i + 1, len(data)):
+#             print(data[j])
+#             if data[j] not in current_string:
+#                 current_string += data[j]
+#             else:
+#                 if len(current_string) > len(res):
+#                     res = current_string
+#                     subs.append(res)
+#                     break
+#
+#             if j == len(data) - 1:
+#                 last_char_checked = True
+
+        # if last_char_checked:
+        #     break
+
+
+# res = ""
+#
+# switcher = False
+#
+# subs = []
+#
+# for char in data:
+#     if not switcher:
+#         current_string = ''
+#
+#     if char not in current_string:
+#         current_string += char
+#         switcher = True
+#     else:
+#         if len(current_string) > len(res):
+#             res = current_string
+#             switcher = False
+
+# res = ''
+#
+# current_string = ''
+#
+# for char in data:
+#     if char not in current_string:
+#         current_string += char
+#         print(f'Настоящая строка: {current_string}')
+#     else:
+#         if len(current_string) > len(res):
+#             res = current_string
+#
+#         current_string = f'{char}'
+#         print(current_string)
+
+
+# intervals = [[8,10],[1,3],[2,6],[15,18]] # [[1, 3], [2, 6], [8, 10], [15, 18]]
+#
+# def merge_intervals(data: list):
+#     sorted_int = sorted(data, key=lambda interval: interval[0])
+#
+#     merged = [[sorted_int.copy()[0]]]
+#
+#     sorted_int.pop(0)
+#
+#     for i in sorted_int:
+#         if i[0] < merged[-1][-1][1]:
+#             merged[-1].append(i)
+#         else:
+#             merged.append([i])
+#
+#     output = []
+#
+#     for i in merged:
+#         output.append([i[0][0], i[-1][-1]])
+#
+#     return output
+#
+#
+# print(merge_intervals(intervals))
+
+
+# nums = [1,1,1,2,2,3,3,3,3,4,5,5,5,5,5]
+# k = 2
+#
+# def get_most_frequent(data: list, top: int):
+#     frequency = {}
+#
+#     for dig in data:
+#         frequency[dig] = frequency.get(dig, 0) + 1
+#
+#     sorted_freq = sorted(frequency.items(), key=lambda items: items[1], reverse=True)
+#
+#     output = list(map(lambda element: element[0], sorted_freq))
+#
+#     return output[:k]
+#
+#
+# print(get_most_frequent(nums, 2))
+
+
+# words = ["eat", "tea", "tan", "ate", "nat", "bat"]
+#
+#
+# def group_anagrams(data: list):
+#     res = {}
+#
+#     checked_words = []
+#
+#     for word in data:
+#         if word not in checked_words:
+#             res[word] = []
+#
+#             for item in data:
+#                 if set(word) == set(item):
+#                     res[word].append(item)
+#                     checked_words.append(item)
+#
+#
+#     return list(res.values())
+#
+#
+# def check_anagrams(data: list):
+#     min_two_words = list(filter(lambda group: len(group) >= 2, data))
+#
+#     return all(len(anagram) >= 2 for anagram in data), any(all(word[0] == group[0][0] for word in group) for group in min_two_words)
+#
+#
+# print(check_anagrams(group_anagrams(words)))
+
+
+# nums = [2, 4, 3, 5, 7, 8, 1]
+# target = 7
+#
+#
+# def get_all_pairs(data: list, targ: int):
+#     output = []
+#
+#     for i in range(len(data)):
+#         for j in range(i + 1, len(data)):
+#             if data[i] + data[j] == targ:
+#                 output.append([data[i], data[j]])
+#
+#     return output
+#
+#
+# print(get_all_pairs(nums, target))
+
+
+# nums = [1, 2, 1, -1, 1]
+# target = 3
+#
+#
+# def get_subs(data: list, targ: int):
+#     res = []
+#
+#     for i in range(len(data)):
+#         current_num = data[i]
+#         res.append([data[i]])
+#
+#         for j in range(i + 1, len(data)):
+#             current_num += data[j]
+#             res[-1].append(data[j])
+#
+#             if current_num == targ:
+#                 break
+#
+#     res = list(filter(lambda arr: sum(arr) == targ, res))
+#
+#     return len(res)
+#
+#
+# print(get_subs(nums, target))
+
+# s = "swisswatermelon"
+#
+# def get_first_unique_char_index(data: str):
+#     for char in data:
+#         if data.count(char) == 1:
+#             return data.index(char)
+#
+#     return None
+#
+#
+# print(get_first_unique_char_index(s))
+
+
+# a = "civic"
+# b = "iaicc"
+# c = "hello"
+# d = "racecar"
+#
+# def if_can_be_pal(data: str):
+#     word_letters = {l: data.count(l) for l in data}
+#
+#     odd_counter = 0
+#
+#     for letter_qty in word_letters.values():
+#         if odd_counter == 2:
+#             return False
+#
+#         if letter_qty % 2 != 0:
+#             odd_counter += 1
+#
+#
+#     return True
+#
+# print(if_can_be_pal(d))
+
+
+# list1 = [-10, 2, 4, 5, 7, 9, 12, 14, 40, 500]
+# list2 = [-10, 2, 3, 6, 8, 10, 11, 13]
+#
+# def merge_and_sort(data1: list, data2: list):
+#     output = []
+#
+#     orig_data1 = data1.copy()
+#     orig_data2 = data2.copy()
+#
+#     while len(output) != len(orig_data1 + orig_data2):
+#         if len(data1) >= 1 and not data2:
+#             output.append(data1[0])
+#             data1.pop(0)
+#             continue
+#         elif len(data2) >= 1 and not data1:
+#             output.append(data2[0])
+#             data2.pop(0)
+#             continue
+#
+#
+#         if data1[0] < data2[0]:
+#             output.append(data1[0])
+#             data1.pop(0)
+#             continue
+#         else:
+#             output.append(data2[0])
+#             data2.pop(0)
+#             continue
+#
+#
+#     return output
+#
+#
+# print(merge_and_sort(list1, list2))
+
+
+# sentences = [
+#     "apple banana apple",
+#     "banana orange apple",
+#     "kiwi banana"
+# ]
+#
+#
+# def get_uniques(data: list):
+#     sentences_merged = ''.join(list(map(lambda s: s + ' ', data))).strip()
+#
+#     all_words = sentences_merged.split()
+#
+#     res = {}
+#
+#     for w in all_words:
+#         res[w] = res.get(w, 0) + 1
+#
+#     output = list(filter(lambda items: items[1] == 1, res.items()))
+#
+#     return list(map(lambda items: items[0], output))
+#
+#
+# print(get_uniques(sentences))
+
+
+# import collections
+
+# 1 task
+
+# words = ["cat", "dog", "cat", "mouse", "dog", "cat"]
+#
+# def most_common(data: list):
+#     data_top = collections.Counter(data)
+#
+#     return data_top.most_common(1)[0][0]
+#
+#
+# print(most_common(words))
+
+# 2 task
+
+# nums = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
+#
+# def most_common(data: list):
+#     data_top = collections.Counter(data)
+#
+#     return data_top.most_common(3)
+#
+#
+# print(most_common(nums))
+
+# task 3 не делал потому что устал от палиндромов
+
+# task 4
+
+# list1 = ["apple", "banana", "apple", "cherry"]
+# list2 = ["banana", "apple", "apple", "cherry", "cherry"]
+#
+# def get_same_qty_words(data1: list, data2: list):
+#     data1_top = dict(collections.Counter(data1))
+#     data2_top = dict(collections.Counter(data2))
+#
+#     res = []
+#
+#     for pair in data1_top.items():
+#         if pair in data2_top.items():
+#             res.append(pair[0])
+#
+#     return res
+#
+#
+# print(get_same_qty_words(list1, list2))
+
+# import collections
+#
+# sentences = [
+#     "the cat and the dog",
+#     "the dog chased the cat",
+#     "the cat slept"
+# ]
+#
+# def get_most_common_biogramms(data: list):
+#     biogramms_list = []
+#
+#     sentences_split = list(map(lambda s: s.split(), data))
+#
+#     for splited_s in sentences_split:
+#         for i in range(len(splited_s) - 1):
+#             biogramms_list.append(str(splited_s[i] + ' ' + splited_s[i + 1]))
+#
+#     bio_top = collections.Counter(biogramms_list)
+#
+#
+#     return bio_top.most_common(3)
+#
+#
+# print(get_most_common_biogramms(sentences))
+
+
+# найти самую длинную последовательность чисел, идущих подряд.
+# тут правильный ответ должен быть [10, 11, 12, 13].
+
+# nums = [10, 5, 12, 3, 55, 11, 13, 54, 56] # [3, 5, 10, 11, 12, 13, 54, 55, 56]
+#
+# def get_longest_sequence(data: list):
+#     sorted_data = sorted(data)
+#
+#     seqs = [[]]
+#
+#     for num in sorted_data:
+#         if not seqs[-1]:
+#             seqs[-1].append(num)
+#         else:
+#             if num - seqs[-1][-1] == 1:
+#                 seqs[-1].append(num)
+#             else:
+#                 seqs.append([num])
+#
+#     print(seqs)
+#
+#
+# print(get_longest_sequence(nums))
+
 
 
 
