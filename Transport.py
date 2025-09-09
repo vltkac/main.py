@@ -1,6 +1,6 @@
 class Transport:
     def __init__(self, speed: (int, float)):
-        if isinstance(speed, (int, float)) and speed >= 0:
+        if isinstance(speed, (int, float)) and speed > 0:
             self.speed = speed
         else:
             raise TypeError('Please insert <int> or <float> object in the speed parameter. It must be positive value.')
